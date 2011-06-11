@@ -38,9 +38,13 @@ def subsm_building_project(line, sub_state)
   when :after_header
     case line
     when /\[compiler:compile/
-      puts 'compiling sources'
+      puts '  compiling sources'
     when /\[compiler:testCompile/
-      puts 'compiling test sources'
+      puts '  compiling test sources'
+    when /\[surefire:test/
+      puts '  executing tests'
+    when /\[install:install/
+      puts '  installing'
     when /---------------/
       ret_sub_state = :inside_header
     end
