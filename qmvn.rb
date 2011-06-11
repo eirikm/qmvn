@@ -43,7 +43,7 @@ class MvnModule
     @log << line
 
     case line
-    when /--------------------/
+    when /\[INFO\] --------------------/
       @state = case @state
                when :header
                  :body
