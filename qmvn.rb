@@ -46,13 +46,18 @@ def subsm_building_project(line, sub_state)
     when :after_header
       case line
       when /\[compiler:compile/
-        puts '  compiling sources'
+        ret_sub_state = :compiler_compile
       when /\[compiler:testCompile/
         puts '  compiling test sources'
       when /\[surefire:test/
         puts '  executing tests'
       when /\[install:install/
         ret_sub_state = :install_install
+      end
+    when :compiler_compile
+      if line[/Compiling (\d+) source files to/]
+        puts "  compiling #{$1} sources"
+        ret_sub_state = :after_header
       end
     when :install_install
       if line[/Installing (.*?) to (.*)/]
