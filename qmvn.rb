@@ -7,7 +7,7 @@ def subsm_reactor_build_order(line, sub_state)
   def extract_project_name(line)
     line[9..-1].chop
   end
-  
+
   case sub_state
   when :before then
     if line[/Reactor build order:/]
@@ -36,7 +36,12 @@ def subsm_building_project(line, sub_state)
       ret_sub_state = :after_header
     end
   when :after_header
-    if line[/---------------/]
+    case line
+    when /\[compiler:compile/
+      puts 'compiling sources'
+    when /\[compiler:testCompile/
+      puts 'compiling test sources'
+    when /---------------/
       ret_sub_state = :inside_header
     end
   end
