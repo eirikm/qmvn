@@ -27,26 +27,40 @@ end
 
 def subsm_building_project(line, sub_state)
   ret_sub_state = sub_state
-  case sub_state
-  when :inside_header
-    case line
-    when /Building ([^\n]+)/
-      puts $1
-    when /--------------------/
-      ret_sub_state = :after_header
-    end
-  when :after_header
-    case line
-    when /\[compiler:compile/
-      puts '  compiling sources'
-    when /\[compiler:testCompile/
-      puts '  compiling test sources'
-    when /\[surefire:test/
-      puts '  executing tests'
-    when /\[install:install/
-      puts '  installing'
-    when /---------------/
-      ret_sub_state = :inside_header
+  
+  case line
+  when /--------------------/
+    ret_sub_state = case sub_state
+                    when :inside_header
+                      :after_header
+                    else
+                      :inside_header
+                    end
+  else
+    case sub_state
+    when :inside_header
+      case line
+      when /Building ([^\n]+)/
+        puts $1
+      end
+    when :after_header
+      case line
+      when /\[compiler:compile/
+        puts '  compiling sources'
+      when /\[compiler:testCompile/
+        puts '  compiling test sources'
+      when /\[surefire:test/
+        puts '  executing tests'
+      when /\[install:install/
+        ret_sub_state = :install_install
+      end
+    when :install_install
+      if line[/Installing (.*?) to (.*)/]
+        from_file = $1
+        to_file = $2
+        
+        puts "  installing: #{File.basename(to_file)}"
+      end
     end
   end
   ret_sub_state
