@@ -25,57 +25,104 @@ def subsm_reactor_build_order(line, sub_state)
   end
 end
 
-def subsm_building_project(line, sub_state)
-  ret_sub_state = sub_state
-  
-  case line
-  when /--------------------/
-    ret_sub_state = case sub_state
-                    when :inside_header
-                      :after_header
-                    else
-                      :inside_header
-                    end
-  else
-    case sub_state
-    when :inside_header
-      case line
-      when /Building ([^\n]+)/
-        puts $1
-      end
-    when :after_header
-      case line
-      when /\[compiler:compile/
-        ret_sub_state = :compiler_compile
-      when /\[compiler:testCompile/
-        puts '  compiling test sources'
-      when /\[surefire:test/
-        puts '  executing tests'
-      when /\[install:install/
-        ret_sub_state = :install_install
-      end
-    when :compiler_compile
-      if line[/Compiling (\d+) source files to/]
-        puts "  compiling #{$1} sources"
-        ret_sub_state = :after_header
-      end
-    when :install_install
-      if line[/Installing (.*?) to (.*)/]
-        from_file = $1
-        to_file = $2
-        
-        puts "  installing: #{File.basename(to_file)}"
+class MvnModule
+  attr_reader :state, :leftover_lines, :log
+
+  def initialize(line)
+    @log = []
+    @log << line
+
+    @state = :header
+    @leftover_lines = []
+    @installed_artifacts = []
+    @compiled_sources = 0
+    @compiled_test_sources = 0
+  end
+
+  def parse(line)
+    @log << line
+
+    case line
+    when /--------------------/
+      @state = case @state
+               when :header
+                 :body
+               when :install_install
+                 puts
+                 @leftover_lines << @log.pop
+                 :end
+               else
+                 :header
+               end
+    else
+      case @state
+      when :header
+        if line[/\[INFO\] Building ([^\n]+)/]
+          @artifact_name = $1
+          print @artifact_name
+        end
+      when :body
+        case line
+        when /\[INFO\] \[compiler:compile/
+          puts
+          @state = :compiler
+          @sub_state = :compile
+        when /\[INFO\] \[compiler:testCompile/
+          @state = :compiler
+          @sub_state = :test_compile
+        when /\[surefire:test/
+          puts
+          print '  executing tests'
+        when /\[INFO\] \[install:install/
+          puts
+          @state = :install_install
+        end
+      when :compiler
+        if line[/\[INFO\] Compiling (\d+) source files to/]
+          case @sub_state
+          when :compile
+            @compiled_sources = $1
+            print "  compiling: "
+            print "#{@compiled_sources} sources"
+          when :test_compile
+            @compiled_test_sources = $1
+            if @compiled_sources == 0
+              print "  compiling: "
+            else
+              print ", "
+            end
+            print "#{@compiled_test_sources} test sources"
+          end
+          @state = :body
+        end
+      when :compiler_testCompile
+        if line[/Compiling (\d+) source files to/]
+          puts "  compiling #{$1} test sources"
+          @state = :after_header
+        end
+      when :install_install
+        if line[/Installing (.*?) to (.*)/]
+          from_file = $1
+          to_file = $2
+          
+          if @installed_artifacts.empty?
+            print "  installing: #{File.basename(to_file)}"
+          else
+            print ", #{File.basename(to_file)}"
+          end
+          @installed_artifacts << to_file
+        end
       end
     end
   end
-  ret_sub_state
 end
 
-
+modules = []
 state = :reactor_build_order
+current_module = nil
+
 sub_state = :before
-
-
+last_line = nil
 ARGF.each do | line |
   case state
   when :reactor_build_order then
@@ -85,12 +132,19 @@ ARGF.each do | line |
       sub_state = :inside_header
     end
   when :building_project
-    sub_state = subsm_building_project(line, sub_state)
-    if sub_state == :end
-      state = :building_project
-      sub_state = :start
+    if current_module == nil
+      current_module = MvnModule.new(last_line)
+    end
+    
+    current_module.parse(line)
+
+    if current_module.state == :end
+      #puts current_module.log
+      modules << current_module
+      current_module = nil
     end
   end
+  last_line = line
 end
 
 # puts $reactor_build_order
