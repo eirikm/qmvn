@@ -47,18 +47,20 @@ class MvnModule
       @state = case @state
                when :header
                  :body
-               when :install_install
-                 puts
-                 @leftover_lines << @log.pop
-                 :end
                else
-                 :header
+                 if @artifact_name != nil
+                   @leftover_lines << @log.pop
+                   :end
+                 else
+                   :header
+                 end
                end
     else
       case @state
       when :header
         if line[/\[INFO\] Building ([^\n]+)/]
           @artifact_name = $1
+          puts
           print @artifact_name
         end
       when :body
@@ -71,14 +73,16 @@ class MvnModule
           @state = :compiler
           @sub_state = :test_compile
         when /\[surefire:test/
-          puts
-          print '  executing tests'
+          @state = :surefire_test
         when /\[INFO\] \[install:install/
           puts
           @state = :install_install
         end
       when :compiler
-        if line[/\[INFO\] Compiling (\d+) source files to/]
+        case line
+        when /\[INFO\] Not compiling test sources/
+          @state = :body
+        when /\[INFO\] Compiling (\d+) source files to/
           case @sub_state
           when :compile
             @compiled_sources = $1
@@ -95,11 +99,14 @@ class MvnModule
           end
           @state = :body
         end
-      when :compiler_testCompile
-        if line[/Compiling (\d+) source files to/]
-          puts "  compiling #{$1} test sources"
-          @state = :after_header
+      when :surefire_test
+        case line
+        when /\[INFO\] Tests are skipped/
+        else
+          puts
+          print '  executing tests'
         end
+        @state = :body
       when :install_install
         if line[/Installing (.*?) to (.*)/]
           from_file = $1
@@ -139,6 +146,7 @@ ARGF.each do | line |
     current_module.parse(line)
 
     if current_module.state == :end
+      puts
       #puts current_module.log
       modules << current_module
       current_module = nil
