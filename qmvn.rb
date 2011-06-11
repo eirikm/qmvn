@@ -26,30 +26,21 @@ def subsm_reactor_build_order(line, sub_state)
 end
 
 def subsm_building_project(line, sub_state)
-  case line
-  when /Building ([^\n]+)/
-    puts $1
-  when /\[compiler:compile/
-    :compiler_compile
-  when /\[compiler:testCompile/
-    :compiler_testCompile
-  when /\[install:install/
-    :install_install
-  else
-    case sub_state
-    when :compiler_compile
-      if line[/Compiling (\d+) source files/]
-        puts "Compiling #{$1} files"
-      end
-    when :compiler_testCompile
-      if line[/Compiling (\d+) source files/]
-        puts "Compiling #{$1} test files"
-      end
-    when :install_install
-      puts line
-      :end
+  ret_sub_state = sub_state
+  case sub_state
+  when :inside_header
+    case line
+    when /Building ([^\n]+)/
+      puts $1
+    when /--------------------/
+      ret_sub_state = :after_header
+    end
+  when :after_header
+    if line[/---------------/]
+      ret_sub_state = :inside_header
     end
   end
+  ret_sub_state
 end
 
 
@@ -63,7 +54,7 @@ ARGF.each do | line |
     sub_state = subsm_reactor_build_order(line, sub_state)
     if sub_state == :end
       state = :building_project
-      sub_state = :start
+      sub_state = :inside_header
     end
   when :building_project
     sub_state = subsm_building_project(line, sub_state)
