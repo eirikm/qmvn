@@ -1,0 +1,103 @@
+[INFO] Scanning for projects...
+[INFO] Reactor build order: 
+[INFO]   Sonar
+[INFO]   Sonar :: Check API
+[INFO]   Sonar :: Channel
+[INFO]   Sonar :: Code Colorizer
+[INFO]   Sonar :: Duplications
+[INFO]   Sonar :: Graph
+[INFO]   Sonar :: Squid
+[INFO]   Sonar :: Plugin API
+[INFO]   Sonar :: Archetypes :: Basic
+[INFO]   Sonar :: Web Service Client
+[INFO]   Sonar :: GWT API
+[INFO]   Sonar :: Archetypes :: GWT
+[INFO]   Sonar :: Core
+[INFO]   Sonar :: Deprecated
+[INFO]   Sonar :: Testing Harness
+[INFO]   Sonar :: Batch
+[INFO]   Sonar :: Maven2 Plugin
+[INFO]   Sonar :: Maven3 Plugin
+[INFO]   Sonar :: Plugins :: Core GWT
+[INFO]   Sonar :: Plugins :: Core
+[INFO]   Sonar :: Plugins :: Database Cleaner
+[INFO]   Sonar :: Plugins :: Checkstyle
+[INFO]   Sonar :: Plugins :: PMD
+[INFO]   Sonar :: Plugins :: Cobertura
+[INFO]   Sonar :: Plugins :: Clover
+[INFO]   Sonar :: Plugins :: Surefire
+[INFO]   Sonar :: Plugins :: Google Analytics
+[INFO]   Sonar :: Plugins :: Findbugs
+[INFO]   Sonar :: Plugins :: CPD
+[INFO]   Sonar :: Plugins :: Squid Java
+[INFO]   Sonar :: Plugins :: Design
+[INFO]   Sonar :: Deprecated Maven2 Plugin
+[INFO]   Sonar :: Server
+[INFO]   Sonar :: Application
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Sonar
+[INFO]    task-segment: [clean, install]
+[INFO] ------------------------------------------------------------------------
+[INFO] [clean:clean {execution: default-clean}]
+[INFO] [enforcer:enforce {execution: enforce-plugin-versions}]
+[INFO] [enforcer:enforce {execution: enforce-java-version}]
+[INFO] [enforcer:enforce {execution: enforce-maven-version}]
+[INFO] [site:attach-descriptor {execution: default-attach-descriptor}]
+[INFO] Preparing source:jar
+[WARNING] Removing: jar from forked lifecycle, to prevent recursive invocation.
+[INFO] [enforcer:enforce {execution: enforce-plugin-versions}]
+[INFO] [enforcer:enforce {execution: enforce-java-version}]
+[INFO] [enforcer:enforce {execution: enforce-maven-version}]
+[INFO] [source:jar {execution: attach-sources}]
+[INFO] [install:install {execution: default-install}]
+[INFO] Installing /Users/eirikm/src/svn/sonar/pom.xml to /Users/eirikm/.m2/repository/org/codehaus/sonar/sonar/2.5-SNAPSHOT/sonar-2.5-SNAPSHOT.pom
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Sonar :: Check API
+[INFO]    task-segment: [clean, install]
+[INFO] ------------------------------------------------------------------------
+[INFO] [clean:clean {execution: default-clean}]
+[INFO] Deleting /Users/eirikm/src/svn/sonar/sonar-check-api/target
+[INFO] [enforcer:enforce {execution: enforce-plugin-versions}]
+[INFO] [enforcer:enforce {execution: enforce-java-version}]
+[INFO] [enforcer:enforce {execution: enforce-maven-version}]
+[INFO] [resources:resources {execution: default-resources}]
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /Users/eirikm/src/svn/sonar/sonar-check-api/src/main/resources
+[INFO] [compiler:compile {execution: default-compile}]
+[INFO] Compiling 11 source files to /Users/eirikm/src/svn/sonar/sonar-check-api/target/classes
+[INFO] [resources:testResources {execution: default-testResources}]
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /Users/eirikm/src/svn/sonar/sonar-check-api/src/test/resources
+[INFO] [compiler:testCompile {execution: default-testCompile}]
+[INFO] Compiling 3 source files to /Users/eirikm/src/svn/sonar/sonar-check-api/target/test-classes
+[INFO] [surefire:test {execution: default-test}]
+[INFO] Surefire report directory: /Users/eirikm/src/svn/sonar/sonar-check-api/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running org.sonar.check.CheckTest
+Tests run: 2, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.121 sec <<< FAILURE!
+Running org.sonar.check.AnnotationIntrospectorTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.014 sec
+
+Results :
+
+Tests in error: 
+  getCheckMetadata(org.sonar.check.CheckTest)
+
+Tests run: 7, Failures: 0, Errors: 1, Skipped: 0
+
+[INFO] ------------------------------------------------------------------------
+[ERROR] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] There are test failures.
+
+Please refer to /Users/eirikm/src/svn/sonar/sonar-check-api/target/surefire-reports for the individual test results.
+[INFO] ------------------------------------------------------------------------
+[INFO] For more information, run Maven with the -e switch
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 15 seconds
+[INFO] Finished at: Sun Jun 12 22:02:12 CEST 2011
+[INFO] Final Memory: 45M/94M
+[INFO] ------------------------------------------------------------------------
