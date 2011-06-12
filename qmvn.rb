@@ -39,6 +39,11 @@ class MvnModule
     @compiled_test_sources = 0
   end
 
+  def set_order(module_no, total_modules)
+    @module_no = module_no
+    @total_modules = total_modules
+  end
+
   def parse(line)
     @log << line
 
@@ -61,7 +66,7 @@ class MvnModule
         if line[/\[INFO\] Building ([^\n]+)/]
           @artifact_name = $1
           puts
-          print @artifact_name
+          print "(#{@module_no}/#{@total_modules}) #{@artifact_name}"
         end
       when :body
         case line
@@ -128,6 +133,7 @@ modules = []
 state = :reactor_build_order
 current_module = nil
 
+counter = 1
 sub_state = :before
 last_line = nil
 ARGF.each do | line |
@@ -141,6 +147,8 @@ ARGF.each do | line |
   when :building_project
     if current_module == nil
       current_module = MvnModule.new(last_line)
+      current_module.set_order(counter, $reactor_build_order.size)
+      counter += 1
     end
     
     current_module.parse(line)
