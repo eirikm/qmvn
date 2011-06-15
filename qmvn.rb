@@ -1,5 +1,9 @@
 #!/usr/bin/env ruby
 
+# quiet mvn alpha
+#
+# Desperately in need of regression tests
+
 $reactor_build_order = []
 
 # sub state machine for reactor_build_order
