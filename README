@@ -1,0 +1,6 @@
+qmvn (quiet maven)
+is a ruby script that filters the output from maven to make it less noisy
+
+use it as follows:
+
+$ mvn clean install | qmvn
