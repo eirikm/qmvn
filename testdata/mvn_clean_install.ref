@@ -1,0 +1,149 @@
+
+(1/34) Sonar
+  installing: sonar-2.5-SNAPSHOT.pom
+
+(2/34) Sonar :: Check API
+  compiling: 11 sources, 3 test sources
+  executing tests
+  installing: sonar-check-api-2.5-SNAPSHOT.jar, sonar-check-api-2.5-SNAPSHOT-sources.jar
+
+(3/34) Sonar :: Channel
+  compiling: 9 sources, 2 test sources
+  executing tests
+  installing: sonar-channel-2.5-SNAPSHOT.jar, sonar-channel-2.5-SNAPSHOT-sources.jar
+
+(4/34) Sonar :: Code Colorizer
+  compiling: 26 sources, 19 test sources
+  executing tests
+  installing: sonar-colorizer-2.5-SNAPSHOT.jar, sonar-colorizer-2.5-SNAPSHOT-sources.jar
+
+(5/34) Sonar :: Duplications
+  compiling: 37 sources
+
+(6/34) Sonar :: Graph
+  compiling: 18 sources, 14 test sources
+  executing tests
+  installing: sonar-graph-2.5-SNAPSHOT.jar, sonar-graph-2.5-SNAPSHOT-sources.jar
+
+(7/34) Sonar :: Squid
+  compiling: 57 sources, 29 test sources
+  executing tests
+  installing: sonar-squid-2.5-SNAPSHOT.jar, sonar-squid-2.5-SNAPSHOT-sources.jar
+
+(8/34) Sonar :: Plugin API
+  compiling: 227 sources, 101 test sources
+  executing tests
+  installing: sonar-plugin-api-2.5-SNAPSHOT.jar, sonar-plugin-api-2.5-SNAPSHOT-tests.jar, sonar-plugin-api-2.5-SNAPSHOT-sources.jar
+
+(9/34) Sonar :: Archetypes :: Basic
+  installing: sonar-basic-plugin-archetype-2.5-SNAPSHOT.jar, sonar-basic-plugin-archetype-2.5-SNAPSHOT-sources.jar
+
+(10/34) Sonar :: Web Service Client
+  compiling: 67 sources, 35 test sources
+  executing tests
+  installing: sonar-ws-client-2.5-SNAPSHOT.jar, sonar-ws-client-2.5-SNAPSHOT-sources.jar
+
+(11/34) Sonar :: GWT API
+  compiling: 31 sources
+
+(12/34) Sonar :: Archetypes :: GWT
+  installing: sonar-gwt-plugin-archetype-2.5-SNAPSHOT.jar, sonar-gwt-plugin-archetype-2.5-SNAPSHOT-sources.jar
+
+(13/34) Sonar :: Core
+  compiling: 43 sources, 34 test sources
+  executing tests
+  installing: sonar-core-2.5-SNAPSHOT.jar, sonar-core-2.5-SNAPSHOT-tests.jar, sonar-core-2.5-SNAPSHOT-sources.jar
+
+(14/34) Sonar :: Deprecated
+  compiling: 41 sources, 24 test sources
+  executing tests
+  installing: sonar-deprecated-2.5-SNAPSHOT.jar, sonar-deprecated-2.5-SNAPSHOT-sources.jar
+
+(15/34) Sonar :: Testing Harness
+  compiling: 4 sources, 2 test sources
+  executing tests
+  installing: sonar-testing-harness-2.5-SNAPSHOT.jar, sonar-testing-harness-2.5-SNAPSHOT-sources.jar
+
+(16/34) Sonar :: Batch
+  compiling: 49 sources, 34 test sources
+  executing tests
+  installing: sonar-batch-2.5-SNAPSHOT.jar, sonar-batch-2.5-SNAPSHOT-sources.jar
+
+(17/34) Sonar :: Maven2 Plugin
+  compiling: 2 sources
+
+(18/34) Sonar :: Maven3 Plugin
+  compiling: 2 sources
+
+(19/34) Sonar :: Plugins :: Core GWT
+  compiling: 35 sources
+
+(20/34) Sonar :: Plugins :: Core
+  compiling: 44 sources, 32 test sources
+  executing tests
+
+  installing: sonar-core-plugin-2.5-SNAPSHOT.jar, sonar-core-plugin-2.5-SNAPSHOT-sources.jar
+(21/34) Sonar :: Plugins :: Database Cleaner
+  compiling: 29 sources, 22 test sources
+  executing tests
+
+  installing: sonar-dbcleaner-plugin-2.5-SNAPSHOT.jar, sonar-dbcleaner-plugin-2.5-SNAPSHOT-sources.jar
+(22/34) Sonar :: Plugins :: Checkstyle
+  compiling: 14 sources, 11 test sources
+  executing tests
+
+  installing: sonar-checkstyle-plugin-2.5-SNAPSHOT.jar, sonar-checkstyle-plugin-2.5-SNAPSHOT-sources.jar
+(23/34) Sonar :: Plugins :: PMD
+  compiling: 17 sources, 10 test sources
+  executing tests
+
+  installing: sonar-pmd-plugin-2.5-SNAPSHOT.jar, sonar-pmd-plugin-2.5-SNAPSHOT-sources.jar
+(24/34) Sonar :: Plugins :: Cobertura
+  compiling: 5 sources, 4 test sources
+  executing tests
+
+  installing: sonar-cobertura-plugin-2.5-SNAPSHOT.jar, sonar-cobertura-plugin-2.5-SNAPSHOT-sources.jar
+(25/34) Sonar :: Plugins :: Clover
+  compiling: 5 sources, 4 test sources
+  executing tests
+
+  installing: sonar-clover-plugin-2.5-SNAPSHOT.jar, sonar-clover-plugin-2.5-SNAPSHOT-sources.jar
+(26/34) Sonar :: Plugins :: Surefire
+  compiling: 7 sources, 2 test sources
+  executing tests
+
+  installing: sonar-surefire-plugin-2.5-SNAPSHOT.jar, sonar-surefire-plugin-2.5-SNAPSHOT-sources.jar
+(27/34) Sonar :: Plugins :: Google Analytics
+  compiling: 2 sources
+
+  installing: sonar-googleanalytics-plugin-2.5-SNAPSHOT.jar, sonar-googleanalytics-plugin-2.5-SNAPSHOT-sources.jar
+(28/34) Sonar :: Plugins :: Findbugs
+  compiling: 24 sources, 12 test sources
+  executing tests
+
+  installing: sonar-findbugs-plugin-2.5-SNAPSHOT.jar, sonar-findbugs-plugin-2.5-SNAPSHOT-sources.jar
+(29/34) Sonar :: Plugins :: CPD
+  compiling: 7 sources, 5 test sources
+  executing tests
+
+  installing: sonar-cpd-plugin-2.5-SNAPSHOT.jar, sonar-cpd-plugin-2.5-SNAPSHOT-sources.jar
+(30/34) Sonar :: Plugins :: Squid Java
+  compiling: 100 sources, 70 test sources
+  executing tests
+
+  installing: sonar-squid-java-plugin-2.5-SNAPSHOT.jar, sonar-squid-java-plugin-2.5-SNAPSHOT-sources.jar
+(31/34) Sonar :: Plugins :: Design
+  compiling: 33 sources, 3 test sources
+  executing tests
+
+  installing: sonar-design-plugin-2.5-SNAPSHOT.jar, sonar-design-plugin-2.5-SNAPSHOT-sources.jar
+(32/34) Sonar :: Deprecated Maven2 Plugin
+  compiling: 2 sources
+
+(33/34) Sonar :: Server
+  compiling: 79 sources, 55 test sources
+  executing tests
+  installing: sonar-server-2.5-SNAPSHOT.war, sonar-server-2.5-SNAPSHOT-sources.jar
+
+(34/34) Sonar :: Application
+  compiling: 2 sources

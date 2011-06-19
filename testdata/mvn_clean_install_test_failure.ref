@@ -1,0 +1,7 @@
+
+(1/34) Sonar
+  installing: sonar-2.5-SNAPSHOT.pom
+
+(2/34) Sonar :: Check API
+  compiling: 11 sources, 3 test sources
+  executing tests
